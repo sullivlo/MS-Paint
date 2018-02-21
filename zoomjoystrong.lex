@@ -3,7 +3,7 @@
 	#include "zoomjoystrong.h"
 %}
 
-%
+%option noyywrap
 
 %%
 

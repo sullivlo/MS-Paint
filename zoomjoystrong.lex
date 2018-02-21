@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 %{
 	#include <stdlib.h>
 	#include "zoomjoystrong.h"
@@ -15,6 +15,6 @@
 
 
 %%
-=======
-zoomjoystrong.lex
->>>>>>> master
+
+
+

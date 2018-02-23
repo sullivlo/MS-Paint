@@ -45,9 +45,9 @@ set_color:	SET_COLOR INT INT INT END_STATEMENT
 %%
 
 /*************************
-* Main will print what instruct was inputted by the user
-* Main will return 0 if the instruction was formateed correctly
-* Main will rint an error if the user inputted the incorrect format
+* Main will print what instruction was inputed by the user
+* Main will return 0 if the users's instruction was formated correctly
+* Main will print an error if the user inputted the incorrect format
 *************************/
 int main(int argc,char** argv){
 	printf("\n===========\n");

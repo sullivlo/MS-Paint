@@ -7,9 +7,9 @@
 
 %%
 
-[$$]							{ yylval.str = strip(yytext); return END;}
+[$$]							{ return END;}
 
-[;]								{ yylval.str = strip(yytext); return END_STATEMENT;}
+[;]								{ return END_STATEMENT;}
 
 ([A-Za-z]{4})					{ yylval.str = strip(yytext); return LINE; } 
 

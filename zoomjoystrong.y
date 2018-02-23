@@ -10,7 +10,7 @@
 
 %error-verbose
 
-%union {int i;float f;char* str; }
+%union {int i; float f; char* str; }
 
 %token line
 %token point
@@ -18,26 +18,28 @@
 %token rectangle
 %token set_color
 
+
+
 %%
 
-line:		line
-		{printf(" %s", $1);} 	
+line:		LINE INT INT INT INT END_STATEMENT
+		{printf(" %s %d %d %d %d%s", $1, $2, $3, $4, $5, $6);} 	
 ;
 
-point:		point
-		{printf(" %s", $1);}
+point:		POINT INT INT END_STATEMENT
+		{printf(" %s %d %d%s", $1, $2, $3, $4);}
 ;
 
-circle:		circle
-		{prinf(" %s",  $1);}
+circle:		CIRCLE INT INT INT END_STATEMENT
+		{prinf(" %s %d %d %d%s",  $1, $2, $3, $4, $5);}
 ;
 
-rectangle:	rectangle
-		{printf(" %s", $1);}
+rectangle:	RECTANGLE INT INT INT INT END_STATEMENT
+		{printf(" %s %d %d %d %d%s", 1, $2, $3, $4, $5, $6);}
 ;
 
-set_color:	set_color
-		{printf(" %s", $1);}
+set_color:	SET_COLOR INT INT INT END_STATEMENT
+		{printf(" %s %d %d %d%s",  $1, $2, $3, $4, $5);}
 ;
 
 %%

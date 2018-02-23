@@ -11,13 +11,13 @@
 
 [;]								{ return END_STATEMENT;}
 
-([A-Za-z]{4})					{ yylval.str = strip(yytext); return LINE; } 
+([A-Za-z]{4})					{ yylval.str = strup(yytext); return LINE; } 
 
-([A-Za-z]{5})					{ yylval.str = strip(yytext); return POINT; }
+([A-Za-z]{5})					{ yylval.str = strup(yytext); return POINT; }
 
-([A-Za-z]{6})					{ yylval.str = strip(yytext); return CIRCLE; }
+([A-Za-z]{6})					{ yylval.str = strup(yytext); return CIRCLE; }
 
-([A-Za-z]{9})					{ yylval.str = strip(yytext); return RECTANGLE; }
+([A-Za-z]{9})					{ yylval.str = strup(yytext); return RECTANGLE; }
 
 ([A-Za-z]{3})\_([A-Za-z]{5})	{ yylval.i = atoi(yytext); return SET_COLOR; }
 

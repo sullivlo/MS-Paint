@@ -4,7 +4,6 @@
     #include "zoomjoystrong.h"
 	void yyerror(const char* msg);
 	int yylex();
-	int num_contacts = 0;
 %}
 
 %error-verbose

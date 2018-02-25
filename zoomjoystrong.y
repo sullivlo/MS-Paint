@@ -31,23 +31,23 @@
 %%
 
 line:		LINE INT INT INT INT END_STATEMENT
-		{ printf(" %s %d %d %d %d%s", $1, $2, $3, $4, $5, $6); line($2, $3, $4, $5); } 	
+		{ printf(" %s %d %d %d %d%s", $1, $2, $3, $4, $5); line($2, $3, $4, $5); } 	
 ;
 
 point:		POINT INT INT END_STATEMENT
-		{ printf(" %s %d %d%s", $1, $2, $3, $4); point($2, $3); }
+		{ printf(" %s %d %d%s", $1, $2, $3); point($2, $3); }
 ;
 
 circle:		CIRCLE INT INT INT END_STATEMENT
-		{ prinf(" %s %d %d %d%s",  $1, $2, $3, $4, $5); circle($2, $3, $4); }
+		{ prinf(" %s %d %d %d%s",  $1, $2, $3, $4); circle($2, $3, $4); }
 ;
 
 rectangle:	RECTANGLE INT INT INT INT END_STATEMENT
-		{ printf(" %s %d %d %d %d%s", $1, $2, $3, $4, $5, $6); rectangle($2, $3, $4, $5); }
+		{ printf(" %s %d %d %d %d%s", $1, $2, $3, $4, $5); rectangle($2, $3, $4, $5); }
 ;
 
 set_color:	SET_COLOR INT INT INT END_STATEMENT
-		{ printf(" %s %d %d %d%s",  $1, $2, $3, $4, $5); set_color($2, $3, $4); }
+		{ printf(" %s %d %d %d%s",  $1, $2, $3, $4); set_color($2, $3, $4); }
 ;
 
 %%
@@ -66,5 +66,7 @@ int main(int argc,char** argv){
 	}	
 
 void yyerror(const char* msg){
-	fprintf(stdeer, "ERROR! %s\n", msg):
-	}
+	//fprintf( "ERROR! %s\n", msg);
+	fprintf(stdeer, "ERROR! %s\n", yylex);
+	
+}

@@ -7,25 +7,27 @@
 
 %%
 
-$$								{ return END; }
+end								{ return END; }
 
 ;								{ return END_STATEMENT; }
 
-[A-Za-z]{4}						{ yylval.str = strup(yytext); return LINE; } 
+line							{ return LINE; } 
 
-[A-Za-z]{5}						{ yylval.str = strup(yytext); return POINT; }
+point							{ return POINT; }
 
-[A-Za-z]{6}						{ yylval.str = strup(yytext); return CIRCLE; }
+circle							{ return CIRCLE; }
 
-[A-Za-z]{9}						{ yylval.str = strup(yytext); return RECTANGLE; }
+rectangle						{ return RECTANGLE; }
 
-([A-Za-z]{3})\_([A-Za-z]{5})	{ yylval.i = atoi(yytext); return SET_COLOR; }
+set_color						{ return SET_COLOR; }
 
 [0-9]+ 							{ yylval.i = atoi(yytext); return INT; }
 
-[0-9]+\.[0-9]+					{ yylval.i = atoi(yytext); return FLOAT; }
+[0-9]+\.[0-9]+					{ yylval.f = atoi(yytext); return FLOAT; }							
 
 [ \t\n]							;
+
+.								{ printf("Incorrect Statement"); }
 
 
 %%

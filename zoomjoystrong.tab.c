@@ -99,7 +99,8 @@
 	void yyerror(const char* msg);
 	int yylex();
 	int inRange(int x, int y);
-	int inRangeR(int x, int y, int r);
+	int inRangeC(int x, int y, int r);
+	int inRangeR(int x, int y, int w, int h);
 
 
 /* Enabling traces.  */
@@ -122,10 +123,10 @@
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 14 "zoomjoystrong.y"
+#line 15 "zoomjoystrong.y"
 {int i; float f; char* str; }
 /* Line 193 of yacc.c.  */
-#line 129 "zoomjoystrong.tab.c"
+#line 130 "zoomjoystrong.tab.c"
 	YYSTYPE;
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
@@ -138,7 +139,7 @@ typedef union YYSTYPE
 
 
 /* Line 216 of yacc.c.  */
-#line 142 "zoomjoystrong.tab.c"
+#line 143 "zoomjoystrong.tab.c"
 
 #ifdef short
 # undef short
@@ -426,8 +427,8 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    31,    31,    32,    35,    36,    39,    39,    39,    39,
-      39,    42,    47,    52,    57,    62
+       0,    32,    32,    33,    36,    37,    40,    40,    40,    40,
+      40,    43,    48,    53,    58,    63
 };
 #endif
 
@@ -1349,47 +1350,47 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 31 "zoomjoystrong.y"
-    { finish(); return 0; ;}
-    break;
-
-  case 3:
 #line 32 "zoomjoystrong.y"
     { finish(); return 0; ;}
     break;
 
+  case 3:
+#line 33 "zoomjoystrong.y"
+    { finish(); return 0; ;}
+    break;
+
   case 11:
-#line 43 "zoomjoystrong.y"
+#line 44 "zoomjoystrong.y"
     { if(inRange((yyvsp[(2) - (6)].i), (yyvsp[(3) - (6)].i)) == 1 && inRange((yyvsp[(4) - (6)].i), (yyvsp[(5) - (6)].i)) == 1){
 				line((yyvsp[(2) - (6)].i), (yyvsp[(3) - (6)].i), (yyvsp[(4) - (6)].i), (yyvsp[(5) - (6)].i));} ;}
     break;
 
   case 12:
-#line 48 "zoomjoystrong.y"
+#line 49 "zoomjoystrong.y"
     {  if(inRange((yyvsp[(2) - (4)].i), (yyvsp[(3) - (4)].i)) == 1){
 				point((yyvsp[(2) - (4)].i), (yyvsp[(3) - (4)].i));} ;}
     break;
 
   case 13:
-#line 53 "zoomjoystrong.y"
-    {  if(inRangeR((yyvsp[(2) - (5)].i), (yyvsp[(3) - (5)].i), (yyvsp[(4) - (5)].i)) == 1){
+#line 54 "zoomjoystrong.y"
+    {  if(inRangeC((yyvsp[(2) - (5)].i), (yyvsp[(3) - (5)].i), (yyvsp[(4) - (5)].i)) == 1){
 				circle((yyvsp[(2) - (5)].i), (yyvsp[(3) - (5)].i), (yyvsp[(4) - (5)].i));} ;}
     break;
 
   case 14:
-#line 58 "zoomjoystrong.y"
-    { if(inRange((yyvsp[(2) - (6)].i), (yyvsp[(3) - (6)].i)) == 1 && inRange((yyvsp[(4) - (6)].i), (yyvsp[(5) - (6)].i)) == 1){
+#line 59 "zoomjoystrong.y"
+    { if(inRange((yyvsp[(2) - (6)].i), (yyvsp[(3) - (6)].i)) == 1 ){
 				rectangle((yyvsp[(2) - (6)].i), (yyvsp[(3) - (6)].i), (yyvsp[(4) - (6)].i), (yyvsp[(5) - (6)].i));} ;}
     break;
 
   case 15:
-#line 63 "zoomjoystrong.y"
+#line 64 "zoomjoystrong.y"
     { if((yyvsp[(4) - (5)].i) > -1 && (yyvsp[(4) - (5)].i) < 256){set_color((yyvsp[(2) - (5)].i), (yyvsp[(3) - (5)].i), (yyvsp[(4) - (5)].i));} ;}
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1393 "zoomjoystrong.tab.c"
+#line 1394 "zoomjoystrong.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1603,7 +1604,7 @@ yyreturn:
 }
 
 
-#line 66 "zoomjoystrong.y"
+#line 67 "zoomjoystrong.y"
 
 
 /*************************
@@ -1637,7 +1638,7 @@ int inRange(int x, int y){
 }
 
 /*************************
-* inRangeR checks the x and y coordinates to the overall drawing map
+* inRangeC checks the x and y coordinates to the overall drawing map
 * and checks the radius points of the circle.
 * @param int x - The x location.
 * @param int y - The y location.
@@ -1645,7 +1646,7 @@ int inRange(int x, int y){
 * @return 1 - Returns 1 if is in the bounds.
 * @return 0 - Returns 0 if is not in the bounds.
 *************************/
-int inRangeR(int x, int y, int r){
+int inRangeC(int x, int y, int r){
 	if(-1 < (x+r) && x < WIDTH && -1 < (y+r) && y < HEIGHT && 
 	-1 < x && (x+r) < WIDTH && -1 < y && (y+r) < HEIGHT
 	-1 < (x-r) && x < WIDTH && -1 < (y-r) && y < HEIGHT &&
@@ -1653,6 +1654,15 @@ int inRangeR(int x, int y, int r){
 		return 1;
 	}
 	printf("Error. %d or %d with Range %d is out of the bounds.\n", x, y, r);
+	return 0;
+}
+
+int inRangeR(int x, int y, int w, int h){
+	if(-1 < x && x < WIDTH && -1 < y && y < HEIGHT &&
+	-1 < x && (x+w) < WIDTH && -1 < y && (y+h) < HEIGHT){
+		return 1;
+	}
+	printf("Error. %d or %d is out of the bounds.\n", x, y);
 	return 0;
 }
 

@@ -119,3 +119,4 @@ int inRangeR(int x, int y, int r){
 void yyerror(const char* msg){
 	fprintf(stderr, "Error. %s", msg);
 	}
+	

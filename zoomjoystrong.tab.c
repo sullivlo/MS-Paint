@@ -1384,7 +1384,7 @@ yyreduce:
 
   case 15:
 #line 63 "zoomjoystrong.y"
-    { set_color((yyvsp[(2) - (5)].i), (yyvsp[(3) - (5)].i), (yyvsp[(4) - (5)].i)); ;}
+    { if((yyvsp[(4) - (5)].i) > -1 && (yyvsp[(4) - (5)].i) < 256){set_color((yyvsp[(2) - (5)].i), (yyvsp[(3) - (5)].i), (yyvsp[(4) - (5)].i));} ;}
     break;
 
 
@@ -1637,7 +1637,7 @@ int inRange(int x, int y){
 }
 
 /*************************
-* inRange checks the x and y coordinates to the overall drawing map
+* inRangeR checks the x and y coordinates to the overall drawing map
 * and checks the radius points of the circle.
 * @param int x - The x location.
 * @param int y - The y location.
@@ -1646,9 +1646,6 @@ int inRange(int x, int y){
 * @return 0 - Returns 0 if is not in the bounds.
 *************************/
 int inRangeR(int x, int y, int r){
-	if(r < -1 || r >255){
-		return 0;
-	}
 	if(-1 < (x+r) && x < WIDTH && -1 < (y+r) && y < HEIGHT && 
 	-1 < x && (x+r) < WIDTH && -1 < y && (y+r) < HEIGHT
 	-1 < (x-r) && x < WIDTH && -1 < (y-r) && y < HEIGHT &&
@@ -1659,8 +1656,11 @@ int inRangeR(int x, int y, int r){
 	return 0;
 }
 
-
+/*************************
+* yyerror is a method the prints out an error statement when they occur. 
+* @param const char* msg - The actual error statement from the system.
+*************************/
 void yyerror(const char* msg){
-	fprintf(stderr, "Error. %s", msg);
+	fprintf(stderr, "Error. %s\n", msg);
 	}
 	

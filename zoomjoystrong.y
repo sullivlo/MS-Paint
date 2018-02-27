@@ -105,6 +105,9 @@ int inRange(int x, int y){
 * @return 0 - Returns 0 if is not in the bounds.
 *************************/
 int inRangeR(int x, int y, int r){
+	if(r < -1 || r >255){
+		return 0;
+	}
 	if(-1 < (x+r) && x < WIDTH && -1 < (y+r) && y < HEIGHT && 
 	-1 < x && (x+r) < WIDTH && -1 < y && (y+r) < HEIGHT
 	-1 < (x-r) && x < WIDTH && -1 < (y-r) && y < HEIGHT &&
@@ -115,8 +118,11 @@ int inRangeR(int x, int y, int r){
 	return 0;
 }
 
-
+/*************************
+* yyerror is a method the prints out an error statement when they occur. 
+* @param const char* msg - The actual error statement from the system.
+*************************/
 void yyerror(const char* msg){
-	fprintf(stderr, "Error. %s", msg);
+	fprintf(stderr, "Error. %s\n", msg);
 	}
 	

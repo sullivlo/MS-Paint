@@ -38,25 +38,58 @@ command: point  |	line  |	circle	| rectangle | set_color
 ;
 
 line:		LINE INT INT INT INT END_STATEMENT
-
-		{ printf(" %s %d %d %d %d%s", $1, $2, $3, $4, $5); line($2, $3, $4, $5); } 	
+		{ 
+            if($2 >= 0 && $2 <= WIDTH &&
+               $3 >= 0 && $3 <= HEIGHT &&
+               $4 >= 0 && $4 <= WIDTH &&
+               $5 >= 0 && $5 <= HEIGHT)   
+               		{
+                    /* Draw the line! */
+                    line($2, $3, $4, $5);
+                    }
+            else { printf("Out of bounds\n");}
+        }	
 ;
 
 point:		POINT INT INT END_STATEMENT
-		{ printf(" %s %d %d%s", $1, $2, $3); point($2, $3); }
+		{ 
+            if($2 >= 0 && $2 <= WIDTH &&
+               $3 >= 0 && $3 <= HEIGHT)
+               		{
+                    /* Draw the point! */
+                    point($2, $3);
+                    }
+            else { printf("Out of bounds\n");}
+        }
 ;
 
 circle:		CIRCLE INT INT INT END_STATEMENT
-		{ prinf(" %s %d %d %d%s",  $1, $2, $3, $4); circle($2, $3, $4); }
+		{ 
+            if( ($2 - $4) >= 0 && ($2 + $4) <= WIDTH &&
+                ($3 - $4) >= 0 && ($3 + $4) <= HEIGHT ) 
+               		{
+                    /* Draw the circle! */
+                    circle($2, $3, $4);
+                    }
+            else { printf("Out of bounds\n");}
+        }
 ;
 
 rectangle:	RECTANGLE INT INT INT INT END_STATEMENT
-		{ printf(" %s %d %d %d %d%s", $1, $2, $3, $4, $5); rectangle($2, $3, $4, $5); }
+		{ 
+			if($2 <= WIDTH && $2 >= 0 &&
+               $3 <= HEIGHT && $3 >= 0 &&
+               (($2 + $4) <= WIDTH) &&
+               (($3 + $5) <= HEIGHT) ) 
+               		{
+              		rectangle($2, $3, $4, $5); 
+              		}
+            else{ printf("Out of bounds\n");}
+        } 
 ;
 
 set_color:	SET_COLOR INT INT INT END_STATEMENT
-		{ printf(" %s %d %d %d%s",  $1, $2, $3, $4); set_color($2, $3, $4); }
-
+		{  set_color($2, $3, $4); }
 ;
 
 %%
@@ -75,9 +108,5 @@ int main(int argc,char** argv){
 	}	
 
 void yyerror(const char* msg){
-
-	//fprintf( "ERROR! %s\n", msg);
-	fprintf(stdeer, "ERROR! %s\n", yylex);
-	
-}
-
+	fprintf(stderr, "Error. %s", msg);
+	}

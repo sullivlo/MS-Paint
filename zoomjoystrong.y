@@ -60,7 +60,7 @@ rectangle:	RECTANGLE INT INT INT INT END_STATEMENT
 ;
 
 set_color:	SET_COLOR INT INT INT END_STATEMENT
-		{ set_color($2, $3, $4); }
+		{ if($4 > -1 && $4 < 256){set_color($2, $3, $4);} }
 ;
 
 %%
@@ -96,7 +96,7 @@ int inRange(int x, int y){
 }
 
 /*************************
-* inRange checks the x and y coordinates to the overall drawing map
+* inRangeR checks the x and y coordinates to the overall drawing map
 * and checks the radius points of the circle.
 * @param int x - The x location.
 * @param int y - The y location.
@@ -105,9 +105,6 @@ int inRange(int x, int y){
 * @return 0 - Returns 0 if is not in the bounds.
 *************************/
 int inRangeR(int x, int y, int r){
-	if(r < -1 || r >255){
-		return 0;
-	}
 	if(-1 < (x+r) && x < WIDTH && -1 < (y+r) && y < HEIGHT && 
 	-1 < x && (x+r) < WIDTH && -1 < y && (y+r) < HEIGHT
 	-1 < (x-r) && x < WIDTH && -1 < (y-r) && y < HEIGHT &&

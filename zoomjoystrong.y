@@ -115,7 +115,7 @@ int inRangeC(int x, int y, int r){
 	printf("Error. %d or %d with Range %d is out of the bounds.\n", x, y, r);
 	return 0;
 }
-*************************
+/*************************
 * inRangeR checks the x and y coordinates to the overall drawing map
 * and checks the other corners or the rectangle.
 * @param int x - The x location.
@@ -126,8 +126,8 @@ int inRangeC(int x, int y, int r){
 * @return 0 - Returns 0 if is not in the bounds.
 *************************/
 int inRangeR(int x, int y, int w, int h){
-	if(-1 < x && x < WIDTH && -1 < y && y < HEIGHT &&
-	-1 < x && (x+w) < WIDTH && -1 < y && (y+h) < HEIGHT){
+	if(-1 < x && x < WIDTH && -1 < y && y < HEIGHT
+		&& (x+w) < WIDTH && (y+h) < HEIGHT){
 		return 1;
 	}
 	printf("Error. %d or %d is out of the bounds.\n", x, y);

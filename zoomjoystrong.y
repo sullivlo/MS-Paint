@@ -140,5 +140,6 @@ int inRangeR(int x, int y, int w, int h){
 *************************/
 void yyerror(const char* msg){
 	fprintf(stderr, "Error. %s\n", msg);
+	yyparse();
 	}
 	
